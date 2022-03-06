@@ -1,8 +1,7 @@
-import json
+import requests
 
-json_text = '{"messages":[{"message":"This is the first message","timestamp":"2021-06-04 16:40:53"},{"message":"And this is a second message","timestamp":"2021-06-04 16:41:01"}]}'
-text2 = json.loads(json_text)
+response = requests.get("https://playground.learnqa.ru/api/long_redirect")
 
-key = "messages"
 
-print(text2[key][1])
+print(len(response.history))
+for name_url in response.history: print( name_url.status_code, name_url.url)

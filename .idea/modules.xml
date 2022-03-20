@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LearnQA_Python_API.iml" filepath="$PROJECT_DIR$/.idea/LearnQA_Python_API.iml" />
-      <module fileurl="file://$USER_HOME$/PycharmProjects/MoySklad_api/.idea/MoySklad_api.iml" filepath="$USER_HOME$/PycharmProjects/MoySklad_api/.idea/MoySklad_api.iml" />
-    </modules>
-  </component>
-</project>

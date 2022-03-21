@@ -19,7 +19,7 @@ class Assertions:
         except json.JSONDecodeError:
             assert False, f"Response is not in JSON format. Response text is '{response.text}'"
 
-        assert name in response_as_dict, f"Respomse JSON doesn't have key '{name}'"
+        assert name in response_as_dict, f"Response JSON doesn't have key '{name}'"
 
     @staticmethod
     def assert_json_has_keys(response: Response, names: list):
@@ -46,7 +46,7 @@ class Assertions:
 
     @staticmethod
     def assert_format_text(response: Response, error_message):
-        assert response.text == error_message, \
+        assert response.text != error_message, \
         f"Unexpectes format email! Expected: {error_message}"
 
     @staticmethod
@@ -57,3 +57,8 @@ class Assertions:
             assert False, f"Response is not in JSON format. Response text is '{response.text}'"
 
         assert name not in response_as_dict, f"Respomse JSON shouldn't have key '{name}'. But it is present"
+
+    @staticmethod
+    def assert_json_error_text(response: Response, name):
+        response_as_dict = json.loads(response)
+        assert response_as_dict != name

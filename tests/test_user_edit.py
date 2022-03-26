@@ -4,7 +4,11 @@ import json
 from lib.base_case import BaseCase
 from lib.Assertions import Assertions
 
+@allure.epic("Редактирование")
 class TestUserEdit(BaseCase):
+
+    @allure.feature("Позитивный")
+    @allure.story("Редактирование пользователя")
     def test_edit_just_create_user(self):
         #REGISTER
         register_data = self.prepare_registration_data()

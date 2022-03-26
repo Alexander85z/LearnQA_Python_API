@@ -3,6 +3,7 @@ import requests
 from lib.base_case import BaseCase
 from lib.Assertions import Assertions
 
+@allure.epic("Удаление")
 class TestUserDelete(BaseCase):
     def test_delete_user_auth(self):
         data = {
@@ -13,7 +14,10 @@ class TestUserDelete(BaseCase):
 
         Assertions.assert_code_status(response, 400)
 
+    @allure.feature("Позитивный")
+    @allure.story("Удаление пользователя")
     def test_delete_user_auth_positive(self):
+
         # REGISTER
         register_data = self.prepare_registration_data()
         response1 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data)
@@ -52,6 +56,8 @@ class TestUserDelete(BaseCase):
         Assertions.assert_code_status(response4, 404)
         assert response4.text == "User not found", F"Неправильный текст ошибки"
 
+    @allure.feature("Негативный")
+    @allure.story("Удаление пользователя")
     def test_delete_user_auth_negative(self):
 
         # REGISTER

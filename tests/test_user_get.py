@@ -3,7 +3,11 @@ import requests
 from lib.base_case import BaseCase
 from lib.Assertions import Assertions
 
+@allure.epic("Запрос пользователя")
 class TestUserGet(BaseCase):
+
+    @allure.feature("Позитивный")
+    @allure.story("Запрос без авторизации")
     def test_get_user_details_not_auth(self):
         response = requests.get("https://playground.learnqa.ru/api/user/2")
 
@@ -12,7 +16,8 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_not_key(response, "firstName")
         Assertions.assert_json_has_not_key(response, "lastName")
 
-
+    @allure.feature("Позитивный")
+    @allure.story("Запрос с авторизацией")
     def test_get_user_datails_auth_as_same_user(self):
         data= {
             'email': 'vinkotov@example.com',
@@ -34,7 +39,8 @@ class TestUserGet(BaseCase):
         expected_fields=["username", "email", "firstName", "lastName"]
         Assertions.assert_json_has_keys(response2, expected_fields)
 
-
+    @allure.feature("Негативный")
+    @allure.story("Запрос с чужой авторизацией")
     def test_get_user_datails_auth_as_another_user(self):
         data= {
             'email': 'vinkotov@example.com',

@@ -4,9 +4,11 @@ from lib.base_case import BaseCase
 from lib.Assertions import Assertions
 from datetime import datetime
 
+@allure.epic("Регистрация")
 class TestUserRegister(BaseCase):
 
-
+    @allure.feature("Позитивный")
+    @allure.story("Удачная регистрация")
     def test_create_user_successfully(self):
         data=self.prepare_registration_data()
 
@@ -15,6 +17,8 @@ class TestUserRegister(BaseCase):
         Assertions.assert_code_status(response, 200)
         Assertions.assert_json_has_key(response, "id")
 
+    @allure.feature("Негативный")
+    @allure.story("Не удачная регистрация")
     def test_create_user_with_existing_email(self):
         email= 'vinkotov@example.com'
         data = self.prepare_registration_data(email)
@@ -25,8 +29,8 @@ class TestUserRegister(BaseCase):
         Assertions.assert_code_status(response, 400)
         assert response.content.decode("utf-8") == f"Users with email '{email}' already exists", f"Unexpected response content {response.content}"
 
-
-
+    @allure.feature("Негативный")
+    @allure.story("Не корректный email")
     def test_create_user_without_dog(self):
         email = 'namelogin.ru'
         data = self.prepare_registration_data(email)
@@ -83,6 +87,8 @@ class TestUserRegister(BaseCase):
         })
     ]
     @pytest.mark.parametrize ('data', data1)
+    @allure.feature("Негативный")
+    @allure.story("Не корректные параметры регистрации")
     def test_create_user_without_params(self, data):
         response = requests.post("https://playground.learnqa.ru/api/user/", data=data)
 
@@ -91,7 +97,8 @@ class TestUserRegister(BaseCase):
 
         print(response.text)
 
-
+    @allure.feature("Негативный")
+    @allure.story("Короткое имя пользователя")
     def test_create_user_min_len_name(self):
         data = {
             'password': '123',
